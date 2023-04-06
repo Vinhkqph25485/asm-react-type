@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product A",
+      "price": "123"
+    },
+    {
+      "id": 3,
+      "name": "Product 2C 2",
+      "price": "8000000"
+    },
+    {
+      "name": "Product A",
+      "price": "100",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "name": "ca 1",
+      "price": "44"
+    },
+    {
+      "name": "csa",
+      "price": "8",
+      "id": 6
+    },
+    {
+      "id": 7,
+      "name": "dưq",
+      "price": "100"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Category A"
+    },
+    {
+      "id": 2,
+      "name": "Category B 1 s"
+    }
+  ]
+}
