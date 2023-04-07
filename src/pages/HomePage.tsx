@@ -1,8 +1,11 @@
 import React from 'react'
+import { ContentPage } from '../components/Contents'
 
 function HomePage() {
   return (
-    <div>HomePage</div>
+    <div>
+      <ContentPage/>
+    </div>
   )
 }
 

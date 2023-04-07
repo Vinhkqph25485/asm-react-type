@@ -20,6 +20,7 @@ const AddProductPage = (props: IProps) => {
     // }
 
     const onFinish = (values: any) => {
+        
         props.onAdd(values)
         navigate('/admin/products')
       };
@@ -42,7 +43,9 @@ const AddProductPage = (props: IProps) => {
                 <Form.Item
                     label="ProductName"
                     name="name"
-                    rules={[{ required: true, message: 'Please input your Product!' }]}
+                    rules={[{ required: true, message: 'Please input your Product!' },
+                    {whitespace: true, message:"Không được để khoảng trắng"}
+                ]}
                 >
                     <Input />
                 </Form.Item>
@@ -50,14 +53,27 @@ const AddProductPage = (props: IProps) => {
                 <Form.Item
                     label="Price"
                     name="price"
-                    rules={[{ required: true, message: 'Please input your price!' }]}
+                    rules={[{ required: true, message: 'Please input your price!' },
+                    {whitespace: true, message:"Không được để khoảng trắng"}
+                ]}
+                >
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    label="Description"
+                    name="description"
+                    rules={[{ required: true, message: 'Please input your price!' },
+                    {whitespace: true, message:"Không được để khoảng trắng"}
+                ]}
                 >
                     <Input />
                 </Form.Item>
 
 
+
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button className='bg-blue-500' type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>

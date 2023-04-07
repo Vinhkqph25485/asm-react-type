@@ -53,7 +53,7 @@ export const AdminLayout = () => {
             getItem('Nember', '3'),
         ]),
         getItem(<Link to={"categories"}>Category</Link>, 'sub3', <UnorderedListOutlined />, [
-            getItem(<Link to={"categories/add"}>Add Category</Link>,4,)
+            getItem(<Link to={"categories/add"} >Add Category</Link>,4,)
         ]),
     ];
 
@@ -71,16 +71,7 @@ export const AdminLayout = () => {
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
                 </Sider>
                 <Layout className="site-layout">
-                    <Header style={{ padding: '0, 20px', background: colorBgContainer, textAlign: 'center' }}>
-                        <Space direction="vertical">
-                            <Search
-                                placeholder="input search text"
-                                enterButton="Search"
-                                size="large"
-                                suffix={suffix}
-                                onSearch={onSearch}
-                            />
-                        </Space>
+                    <Header style={{ padding: '0, 25px', background: colorBgContainer, textAlign: 'center' }}>
                     </Header>
                     <Content style={{ margin: '0 16px' }}>
                         <Outlet />

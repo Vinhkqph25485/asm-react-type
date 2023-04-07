@@ -1,10 +1,10 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
+
 import { Link, useNavigate } from 'react-router-dom'
 import { IProduct } from '../interfaces/products'
-import { Space, Table, Button } from 'antd';
+import { Space, Table, Button, Input , Image} from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+const {Search} = Input
 interface IPorps {
     products: IProduct[],
     onRemove: (id:number | string) => void
@@ -21,6 +21,7 @@ export const ProductManagement = (props:IPorps) => {
     const navigate = useNavigate()
 
     const data = props.products.map(item => {
+      
         return {
             key: item._id,
             name: item.name,
@@ -30,6 +31,7 @@ export const ProductManagement = (props:IPorps) => {
 
         }
     })
+    
     const removeProducts = (id: number | string) => {
         props.onRemove(id)
     }
@@ -37,11 +39,17 @@ export const ProductManagement = (props:IPorps) => {
         navigate('/admin/products/update/' + id)
     }
 
+    const [searchedText, setSearchedText] = useState("")
+
     const columns: ColumnsType<DataType> = [
         {
           title: 'ProductName',
           dataIndex: 'name',
           key: 'name',
+          filteredValue: [searchedText],
+          onFilter(value, record){
+            return String(record.name).toLowerCase().includes(String(value).toLowerCase())
+          },
           render: (text) => <a>{text}</a>,
         },
         {
@@ -53,7 +61,7 @@ export const ProductManagement = (props:IPorps) => {
           title: 'Image',
           dataIndex: 'image',
           key: 'image',
-          render: (text) => <img src={text} width={80}/>
+          render: (text) =><Image src={text} width={80}/>
         },
         {
           title: 'Description',
@@ -66,15 +74,16 @@ export const ProductManagement = (props:IPorps) => {
           render: (record) => (
             <Space size="middle">
               <Button type="primary" style={{ backgroundColor: 'red' }} onClick={() => removeProducts(record.key)}>Remove</Button>
-              <Button type="primary" onClick={() => updateProduct(record.key)}>Update</Button>
+              <Button style={{ backgroundColor: 'blue' }} type="primary" onClick={() => updateProduct(record.key)}>Update</Button>
             </Space>
           ),
         },
       ];
     return (
         <div>
-            <Button type="primary"><Link to={'/admin/products/add'}>Add Products</Link></Button>
-            <Table columns={columns} dataSource={data} pagination={{ pageSize: 4, showQuickJumper: true }} />
+          <Search className='bg-blue-500' placeholder="input search text" enterButton="Search" size="large" style={{margin:'0 0 10px 0'}} onSearch={(value)=>{setSearchedText(value)}}/>
+            <Button className='bg-blue-500' type="primary"><Link to={'/admin/products/add'}>Add Products</Link></Button>
+            <Table columns={columns} dataSource={data} pagination={{ pageSize: 5, showQuickJumper: true }} />
         </div>
     )
 }

@@ -1,6 +1,15 @@
 import { IProduct } from "../interfaces/products";
 import instance from "./instance";
 
+export interface IProduct1{
+    id: number | string,
+    name?: string,
+    price?: number,
+    image?: string,
+    description?: string,
+    categoryId?: number | string,
+
+}
 const getAllProducts = () => {
     return instance.get("/products/")
 }
@@ -18,7 +27,7 @@ const deleteProduct = (id: number | string) => {
 }
 
 const updateProduct = (product: IProduct) => {
-    return instance.put("/products/" + product._id, product)
+    return instance.put("/products/" + product.id, product)
 }
 
 export {getAllProducts, getOneProduct, addProduct, deleteProduct, updateProduct}

@@ -18,7 +18,7 @@ const AddCategoryPage = (props: IProps) => {
     //     navigate('/admin/products')
     // }
 
-    const onFinish = (values: any) => {
+    const onFinish = (values: any) => {  
         props.onAdd(values)
         navigate('/admin/categories')
       };
@@ -41,7 +41,9 @@ const AddCategoryPage = (props: IProps) => {
                 <Form.Item
                     label="Category"
                     name="name"
-                    rules={[{ required: true, message: 'Please input your Category!' }]}
+                    rules={[{ required: true, message: 'Please input your Category!' },
+                    {whitespace: true, message:"Không được để khoảng trắng"}
+                ]}
                 >
                     <Input />
                 </Form.Item>
@@ -49,7 +51,7 @@ const AddCategoryPage = (props: IProps) => {
 
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button className='bg-blue-500' type="primary" htmlType="submit">
                         Submit
                     </Button>
                 </Form.Item>

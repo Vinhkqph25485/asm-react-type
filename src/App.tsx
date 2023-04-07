@@ -9,14 +9,17 @@ import { Dashboard } from './admin/Dashboard'
 import AddProductPage from './admin/AddProduct'
 import UpdateProductPage from './admin/UpdateProduct'
 import { ProductManagement } from './admin/ProductManagement'
-import { CreateAccount } from './login/CreateAccount'
+
 import AdminLayout from './admin/layout/AdminLayout'
-import { Login } from './login/Login'
 import { ICategory } from './interfaces/category'
 import { addCategory, deleteCategory, getAllCategories, updateCategory } from './api/category'
 import { CategoryManagement } from './admin/category/CategoryManagement'
 import AddCategoryPage from './admin/category/AddCategory'
 import UpdateCategoryPage from './admin/category/UpdateCategory'
+import WebsiteLayout from './pages/layout/WebsiteLayout'
+import CreateAccount from './login/CreateAccount'
+import Login from './login/Login'
+
 // import './App.css'
 
 function App() {
@@ -48,20 +51,23 @@ function App() {
   }
 
   const onHandleUpdateCate = (category: ICategory) => {
-    updateCategory(category).then(() => setCategories(categories.map((item) => item.id == category.id ? category : item)))
+    console.log(category);
+    
+    updateCategory(category).then(() => setCategories(categories.map((item) => item._id == category._id ? category : item)))
   }
 
   const onHandleRemoveCate = (id: number | string) => {
     const confirm = window.confirm("Ban co muon xoa")
     if (confirm) {
-      deleteCategory(id).then(() => setCategories(categories.filter((item) => item.id !== id)))
+      deleteCategory(id).then(() => setCategories(categories.filter((item) => item._id !== id)))
     }
+    location.reload()
   }
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/'>
+        <Route path='/' element={<WebsiteLayout/>}>
           <Route index element={<HomePage />} />
           <Route path='products'>
             <Route index element={<ProductPage products={products} onRemove={onHandleRemove} />} />

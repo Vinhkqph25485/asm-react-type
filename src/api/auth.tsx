@@ -1,7 +1,5 @@
 import instance from "./instance"
 
-
-
 export const signup = (data:any) => {
     const uri = "/signup"
     return instance.post(uri, data)
