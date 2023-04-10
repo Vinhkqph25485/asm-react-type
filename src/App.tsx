@@ -59,7 +59,7 @@ function App() {
   const onHandleRemoveCate = (id: number | string) => {
     const confirm = window.confirm("Ban co muon xoa")
     if (confirm) {
-      deleteCategory(id).then(() => setCategories(categories.filter((item) => item._id !== id)))
+      deleteCategory(id).then(() => setProduct(categories.filter((item) => item._id !== id)))
     }
     location.reload()
   }

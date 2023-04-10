@@ -2,9 +2,9 @@ import * as Yup from 'yup'
 
 
 export const signupSchema = Yup.object({
-    name: Yup.string().required("Trường dữ liệu bắt buộc"),
-    email: Yup.string().email("Email sai định dạng").required("Trường dữ liệu bắt buộc"),
-    password: Yup.string().min(6).required("Trường dữ liệu bắt buộc"),
+    name: Yup.string().trim().required("Trường dữ liệu bắt buộc"),
+    email: Yup.string().trim().email("Email sai định dạng").required("Trường dữ liệu bắt buộc"),
+    password: Yup.string().trim().min(6).required("Trường dữ liệu bắt buộc"),
     confirmPassword: Yup.string().oneOf([Yup.ref('password')], "Mật khẩu không khớp"),
 })
 

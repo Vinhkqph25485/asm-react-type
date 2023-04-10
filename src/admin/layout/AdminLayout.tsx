@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     UnorderedListOutlined,
     UserOutlined,
@@ -6,15 +6,30 @@ import {
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { Outlet } from 'react-router-dom';
-import { Input, Space } from 'antd';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { Input, Space, Button } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 const { Header, Content, Footer, Sider } = Layout;
 
 type MenuItem = Required<MenuProps>['items'][number];
 
+interface User {
+    name: string;
+}
 export const AdminLayout = () => {
+    const navigate = useNavigate();
+
+    const [loggedIn, setLoggedIn] = useState<User | null>(() => {
+        const user = localStorage.getItem('user');
+        return user ? JSON.parse(user) : null;
+    });
+    const handleLogout = () => {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('user');
+        setLoggedIn(null);
+        navigate("/")
+    };
     const { Search } = Input;
 
     const suffix = (
@@ -71,7 +86,9 @@ export const AdminLayout = () => {
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
                 </Sider>
                 <Layout className="site-layout">
-                    <Header style={{ padding: '0, 25px', background: colorBgContainer, textAlign: 'center' }}>
+                    <Header style={{ padding: '0, 25px', background: colorBgContainer, textAlign: 'end', display: 'flex' }}>
+                    <Content className='text-xl my-2'>Xin chào: {loggedIn?.name}</Content>
+                        <Button style={{margin: '8px '}}  onClick={handleLogout} className='bg-red-500' type="primary">Logout</Button>
                     </Header>
                     <Content style={{ margin: '0 16px' }}>
                         <Outlet />

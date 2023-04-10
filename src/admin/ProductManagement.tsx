@@ -10,11 +10,11 @@ interface IPorps {
     onRemove: (id:number | string) => void
 }
 interface DataType {
-    key: string;
+    key: string | number;
     name: string;
-    age: number;
-    address: string;
-    tags: string[];
+    price: number;
+    image: string;
+    description: string;
   }
 export const ProductManagement = (props:IPorps) => {
     // const [data, setData] = useState<IProduct[]>([])
@@ -23,11 +23,11 @@ export const ProductManagement = (props:IPorps) => {
     const data = props.products.map(item => {
       
         return {
-            key: item._id,
-            name: item.name,
-            price: item.price,
-            image: item.image,
-            description: item.description
+            key: item?._id,
+            name: item?.name,
+            price: item?.price,
+            image: item?.image,
+            description: item?.description
 
         }
     })
@@ -83,7 +83,7 @@ export const ProductManagement = (props:IPorps) => {
         <div>
           <Search className='bg-blue-500' placeholder="input search text" enterButton="Search" size="large" style={{margin:'0 0 10px 0'}} onSearch={(value)=>{setSearchedText(value)}}/>
             <Button className='bg-blue-500' type="primary"><Link to={'/admin/products/add'}>Add Products</Link></Button>
-            <Table columns={columns} dataSource={data} pagination={{ pageSize: 5, showQuickJumper: true }} />
+            <Table<DataType> columns={columns} dataSource={data} pagination={{ pageSize: 5, showQuickJumper: true }} />
         </div>
     )
 }

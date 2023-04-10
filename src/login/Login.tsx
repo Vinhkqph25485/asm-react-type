@@ -19,13 +19,16 @@ const Signin = () => {
     const onSubmit = async (data: SigninForm) => {
         try {
             const { data: { accessToken, user } } = await signin(data)
-            console.log(user);
             
-
+            // await signin(data).then(({data}) => {
+            //     localStorage.setItem("user", JSON.stringify(data))
+            // })
             setUser({
                 accessToken,
                 ...user
             })
+            // console.log(users);
+            
             if (user.role == "admin") {
                 navigate('/admin')
                 alert("Đăng nhập thành công")

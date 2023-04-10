@@ -5,7 +5,7 @@ import { SignupForm, signupSchema } from '../model/model';
 import { signup } from '../api/auth';
 import { FooterPage } from '../components/Footer';
 import { HeaderPage } from '../components/Header';
-
+import { Link } from 'react-router-dom';
 const CreateAccount = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<SignupForm>({
         resolver: yupResolver(signupSchema)
@@ -149,7 +149,7 @@ const CreateAccount = () => {
 
                             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                                 Already have an account?
-                                <a href="signin" className="text-gray-700 underline">Log in</a>.
+                                <Link to="/signin" className="text-gray-700 underline">Login</Link>
                             </p>
                         </div>
                     </form>
